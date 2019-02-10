@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  position: relative;
 }
 
 .App-logo {
@@ -9,7 +10,8 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  height: auto;
+  padding: 25px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,15 +20,38 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.field {
+  position: relative;
+  height: 500px;
+  width: 500px;
+  background: #fff;
+  border: gray 2px solid;
+  margin: 20px auto;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.bug {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  background: #000;
+}
+
+.hooks-main {
+  position: relative;
+  width: 500px;
+  height: 500px;
+  overflow: hidden;
+  border: black 2px solid;
+  margin: 0 auto;
+}
+
+.hooks-main > div {
+  position: absolute;
+  will-change: transform;
+  background: lightcoral;
+  opacity: 0.6;
+  height: 50px;
+  width: 25px;
+  top: 0;
+  left: 0;
 }
