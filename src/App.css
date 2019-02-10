@@ -20,15 +20,6 @@
   color: white;
 }
 
-.field {
-  position: relative;
-  height: 500px;
-  width: 500px;
-  background: #fff;
-  border: gray 2px solid;
-  margin: 20px auto;
-}
-
 .bug {
   position: absolute;
   width: 25px;
@@ -36,7 +27,7 @@
   background: #000;
 }
 
-.hooks-main {
+.field {
   position: relative;
   width: 500px;
   height: 500px;
@@ -45,24 +36,18 @@
   margin: 0 auto;
 }
 
-.hooks-main > div {
+.field > div {
   position: absolute;
   will-change: transform;
-  background: lightcoral;
   opacity: 0.6;
-  height: 25px;
+  height: 50px;
   width: 50px;
   top: 0;
   margin-left: 0;
   border-right: 2px solid black;
-}
-
-#pointer {
-  width: 50px;
-  height: auto;
-  position: relative;
-  transform-origin: center 110px;
-  display: block;
-  margin: 0 auto;
-  touch-action: none;
+  background-image: url(https://www.svgrepo.com/show/13138/bug.svg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 50px 50px;
+  cursor: pointer;
 }

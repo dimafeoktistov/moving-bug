@@ -1,15 +1,16 @@
 import React, { useRef } from "react";
 import { useSpring, animated } from "react-spring";
-import * as d3 from 'd3-ease'
+import PropTypes from "prop-types";
+import * as d3 from "d3-ease";
 
-const translate = (x, y, angle) =>
-  `translate(${x}px, ${y}px) rotate(${angle}deg)`;
-// const rotate = angle => `translate(${x}px, ${y}px)`;
+const translate = (x, y, angle) => `translate(${x}px, ${y}px)`;
 
-const Bug = React.forwardRef(({ x, y }, ref) => {
+const Bug = ({ speed, direction }) => {
   const bug = useRef(null);
+  const field = useRef(null);
 
-  const getBugPosition = el => {
+  console.log(speed);
+  const getElemPosition = el => {
     const { top, left } = el.current.getBoundingClientRect();
 
     return {
@@ -20,16 +21,34 @@ const Bug = React.forwardRef(({ x, y }, ref) => {
 
   const handleMouseMove = e => {
     const mousePosition = {
-      x: e.clientX - x - 25,
-      y: e.clientY - y - 25
+      x: e.clientX - getElemPosition(field).x - 25,
+      y: e.clientY - getElemPosition(field).y - 25
     };
-    const blockPosition = getBugPosition(bug);
+    const blockPosition = getElemPosition(bug);
     set({
       xy: [
         mousePosition.x,
         mousePosition.y,
         rotationDegrees(blockPosition, { x: e.clientX - 25, y: e.clientY - 25 })
-      ]
+      ],
+      config: {
+        tention: speed * 50,
+        friction: 100 / speed,
+        easing: t => t ** 2,
+        duration: undefined
+      }
+    });
+  };
+
+  const handleMouseEnter = () => {
+    set({
+      xy: [Math.random(), Math.random(), 90],
+      config: {
+        tention: speed * 50,
+        friction: 100 / speed,
+        easing: t => t ** 2,
+        duration: undefined
+      }
     });
   };
 
@@ -38,18 +57,28 @@ const Bug = React.forwardRef(({ x, y }, ref) => {
 
   const [coords, set] = useSpring(() => ({
     xy: [0, 0, 90],
-    config: { tention: 50, friction: 80, easing: t => d3.easeElasticIn(t), duration: 1000 }
+    config: {
+      tention: speed * 50,
+      friction: 100 / speed,
+      easing: t => t ** 2,
+      duration: undefined
+    }
   }));
 
   return (
-    <div ref={ref} className="hooks-main" onMouseMove={handleMouseMove}>
+    <div
+      ref={field}
+      className="field"
+      onMouseMove={direction ? handleMouseMove : null}
+    >
       <animated.div
         ref={bug}
         style={{ transform: coords.xy.interpolate(translate) }}
+        onMouseEnter={direction ? null : handleMouseEnter}
       />
     </div>
   );
-});
+};
 
 export default Bug;
 
@@ -65,3 +94,4 @@ export default Bug;
 //     y: centerY
 //   };
 // };
+// rotate(${angle}deg)

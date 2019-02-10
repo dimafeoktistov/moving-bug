@@ -1,41 +1,51 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 
 import Bug from "./components/Bug";
 import "./App.css";
 
-class App extends Component {
-  state = {
-    x: 0,
-    y: 0
-  };
+const App = () => {
+  // Стейт отвечающий за скорость
+  const [speed, setSpeed] = useState(5);
+  const handleSpeedIncrease = () => setSpeed(speed + 1);
+  const handleSpeedDecrease = () => setSpeed(speed - 1);
 
-  componentDidMount() {
-    const coordinates = this.getPosition();
-    this.setState({ ...coordinates });
-  }
+  // Стейт отвечающий за направление
+  const [direction, setDirection] = useState(true);
+  const handleDirectionChange = () => setDirection(!direction);
 
-  bug = React.createRef();
-
-  getPosition = () => {
-    let el = this.bug.current;
-
-    const { top, left } = el.getBoundingClientRect();
-
-    return {
-      x: left - 20,
-      y: top - 25
-    };
-  };
-
-  render() {
-    const { x, y } = this.state;
-    return (
-      <div className="App">
-        <header className="App-header">Жук</header>
-        <Bug ref={this.bug} x={x} y={y} />
-      </div>
-    );
-  }
-}
+  return (
+    <div className="App">
+      <header className="App-header">Жук</header>
+      <main className="content">
+        <Bug speed={speed} direction={direction} />
+        <aside>
+          <div className="speed-control">
+            Уровень скорости {speed}
+            <button
+              type="button"
+              disabled={speed === 10}
+              onClick={handleSpeedIncrease}
+            >
+              +
+            </button>
+            <button
+              type="button"
+              disabled={speed === 1}
+              onClick={handleSpeedDecrease}
+            >
+              -
+            </button>
+          </div>
+          <div className="direction-control">
+            {direction ? "Жук догоняет" : "Жук убегает"}
+            <button type="button" onClick={handleDirectionChange}>
+              Поменять
+            </button>
+          </div>
+        </aside>
+      </main>
+    </div>
+  );
+};
 
 export default App;
