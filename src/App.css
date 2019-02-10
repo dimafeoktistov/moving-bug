@@ -50,8 +50,19 @@
   will-change: transform;
   background: lightcoral;
   opacity: 0.6;
-  height: 50px;
-  width: 25px;
+  height: 25px;
+  width: 50px;
   top: 0;
-  left: 0;
+  margin-left: 0;
+  border-right: 2px solid black;
+}
+
+#pointer {
+  width: 50px;
+  height: auto;
+  position: relative;
+  transform-origin: center 110px;
+  display: block;
+  margin: 0 auto;
+  touch-action: none;
 }

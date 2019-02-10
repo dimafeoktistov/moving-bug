@@ -22,8 +22,8 @@ class App extends Component {
     const { top, left } = el.getBoundingClientRect();
 
     return {
-      x: left,
-      y: top
+      x: left - 20,
+      y: top - 25
     };
   };
 
