@@ -3,33 +3,33 @@ import { useSpring, animated } from "react-spring";
 import PropTypes from "prop-types";
 import * as d3 from "d3-ease";
 
-const translate = (x, y, angle) => `translate(${x}px, ${y}px)`;
+import * as utils from "../../utils";
 
 const Bug = ({ speed, direction }) => {
   const bug = useRef(null);
   const field = useRef(null);
 
-  console.log(speed);
-  const getElemPosition = el => {
-    const { top, left } = el.current.getBoundingClientRect();
-
-    return {
-      x: left,
-      y: top
-    };
-  };
-
   const handleMouseMove = e => {
+    console.log(e.clientX);
+    console.log(
+      utils.generateRandomValue(
+        utils.getElemPosition(field).y,
+        utils.getElemPosition(field).y + 100
+      )
+    );
     const mousePosition = {
-      x: e.clientX - getElemPosition(field).x - 25,
-      y: e.clientY - getElemPosition(field).y - 25
+      x: e.clientX - utils.getElemPosition(field).x - 25,
+      y: e.clientY - utils.getElemPosition(field).y - 25
     };
-    const blockPosition = getElemPosition(bug);
+    const blockPosition = utils.getElemPosition(bug);
     set({
       xy: [
         mousePosition.x,
         mousePosition.y,
-        rotationDegrees(blockPosition, { x: e.clientX - 25, y: e.clientY - 25 })
+        utils.getRotationDegrees(blockPosition, {
+          x: e.clientX - 25,
+          y: e.clientY - 25
+        })
       ],
       config: {
         tention: speed * 50,
@@ -42,7 +42,17 @@ const Bug = ({ speed, direction }) => {
 
   const handleMouseEnter = () => {
     set({
-      xy: [Math.random(), Math.random(), 90],
+      xy: [
+        utils.generateRandomValue(
+          utils.getElemPosition(field).x,
+          utils.getElemPosition(field).x + 200
+        ),
+        utils.generateRandomValue(
+          utils.getElemPosition(field).y,
+          utils.getElemPosition(field).y + 200
+        ),
+        90
+      ],
       config: {
         tention: speed * 50,
         friction: 100 / speed,
@@ -51,9 +61,6 @@ const Bug = ({ speed, direction }) => {
       }
     });
   };
-
-  const rotationDegrees = (anchor, point) =>
-    (Math.atan2(anchor.y - point.y, anchor.x - point.x) * 180) / Math.PI + 180;
 
   const [coords, set] = useSpring(() => ({
     xy: [0, 0, 90],
@@ -73,11 +80,16 @@ const Bug = ({ speed, direction }) => {
     >
       <animated.div
         ref={bug}
-        style={{ transform: coords.xy.interpolate(translate) }}
+        style={{ transform: coords.xy.interpolate(utils.translate) }}
         onMouseEnter={direction ? null : handleMouseEnter}
       />
     </div>
   );
+};
+
+Bug.propTypes = {
+  speed: PropTypes.number.isRequired,
+  direction: PropTypes.bool.isRequired
 };
 
 export default Bug;
