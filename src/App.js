@@ -20,6 +20,10 @@ const App = () => {
   const [duration, setDuration] = useState(1500);
   const handleDurationChange = e => setDuration(parseInt(e.target.value));
 
+  const [bugsNum, setBugsNum] = useState(1);
+  const handleBugsNumIncrease = () => setBugsNum(bugsNum + 1);
+  const handleBugsNumDecrease = () => setBugsNum(bugsNum - 1);
+
   return (
     <div className="App">
       <header className="App-header">Жук</header>
@@ -30,6 +34,7 @@ const App = () => {
           d3easing={d3easing}
           easeFunction={easeFunction}
           duration={duration}
+          bugsNum={bugsNum}
         />
         <aside>
           <div className="speed-control">
@@ -45,6 +50,23 @@ const App = () => {
               type="button"
               disabled={speed === 1}
               onClick={handleSpeedDecrease}
+            >
+              -
+            </button>
+          </div>
+          <div className="bugs-num">
+            Число жуков {bugsNum}
+            <button
+              type="button"
+              disabled={bugsNum === 5}
+              onClick={handleBugsNumIncrease}
+            >
+              +
+            </button>
+            <button
+              type="button"
+              disabled={speed === 1}
+              onClick={handleBugsNumDecrease}
             >
               -
             </button>

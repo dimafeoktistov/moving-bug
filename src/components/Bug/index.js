@@ -1,10 +1,17 @@
 import React, { useRef } from "react";
-import { useSpring, animated } from "react-spring";
+import { useSpring, useTrail, animated } from "react-spring";
 import PropTypes from "prop-types";
 
 import * as utils from "../../utils";
 
-const Bug = ({ speed, direction, d3easing, easeFunction, duration }) => {
+const Bug = ({
+  speed,
+  direction,
+  d3easing,
+  easeFunction,
+  duration,
+  bugsNum
+}) => {
   const bug = useRef(null);
   const field = useRef(null);
 
@@ -14,10 +21,11 @@ const Bug = ({ speed, direction, d3easing, easeFunction, duration }) => {
       y: e.clientY - utils.getElemPosition(field).y - 25
     };
     const blockPosition = utils.getElemPosition(bug);
-    set({
+    setTrail({
       xy: [
         mousePosition.x,
         mousePosition.y,
+        // utils.generateRandomValue(-180, 180)
         utils.getRotationDegrees(blockPosition, {
           x: e.clientX - 25,
           y: e.clientY - 25
@@ -33,7 +41,7 @@ const Bug = ({ speed, direction, d3easing, easeFunction, duration }) => {
   };
 
   const handleMouseEnter = () => {
-    set({
+    setTrail({
       xy: [
         utils.generateRandomValue(50, 450),
         utils.generateRandomValue(50, 450),
@@ -58,17 +66,35 @@ const Bug = ({ speed, direction, d3easing, easeFunction, duration }) => {
     }
   }));
 
+  const [trail, setTrail] = useTrail(bugsNum, () => ({
+    xy: [0, 0, 90],
+    config: {
+      tention: speed * 50,
+      friction: 100 / speed,
+      easing: t => t ** 2,
+      duration: undefined
+    }
+  }));
+
   return (
     <div
       ref={field}
       className="field"
       onMouseMove={direction ? handleMouseMove : null}
     >
-      <animated.div
+      {/* <animated.div
         ref={bug}
         style={{ transform: coords.xy.interpolate(utils.translate) }}
         onMouseEnter={direction ? null : handleMouseEnter}
-      />
+      /> */}
+      {trail.map((props, index) => (
+        <animated.div
+          onMouseEnter={direction ? null : handleMouseEnter}
+          ref={bug}
+          key={index}
+          style={{ transform: props.xy.interpolate(utils.translate) }}
+        />
+      ))}
     </div>
   );
 };
@@ -78,7 +104,8 @@ Bug.propTypes = {
   direction: PropTypes.bool.isRequired,
   d3easing: PropTypes.bool.isRequired,
   easeFunction: PropTypes.string.isRequired,
-  duration: PropTypes.number.isRequired
+  duration: PropTypes.number.isRequired,
+  bugsNum: PropTypes.number.isRequired
 };
 
 export default Bug;
