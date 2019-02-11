@@ -1,22 +1,14 @@
 import React, { useRef } from "react";
 import { useSpring, animated } from "react-spring";
 import PropTypes from "prop-types";
-import * as d3 from "d3-ease";
 
 import * as utils from "../../utils";
 
-const Bug = ({ speed, direction }) => {
+const Bug = ({ speed, direction, d3easing, easeFunction, duration }) => {
   const bug = useRef(null);
   const field = useRef(null);
 
   const handleMouseMove = e => {
-    console.log(e.clientX);
-    console.log(
-      utils.generateRandomValue(
-        utils.getElemPosition(field).y,
-        utils.getElemPosition(field).y + 100
-      )
-    );
     const mousePosition = {
       x: e.clientX - utils.getElemPosition(field).x - 25,
       y: e.clientY - utils.getElemPosition(field).y - 25
@@ -34,8 +26,8 @@ const Bug = ({ speed, direction }) => {
       config: {
         tention: speed * 50,
         friction: 100 / speed,
-        easing: t => t ** 2,
-        duration: undefined
+        easing: t => utils.getEasingFunc(easeFunction, t),
+        duration: d3easing ? duration : undefined
       }
     });
   };
@@ -43,21 +35,15 @@ const Bug = ({ speed, direction }) => {
   const handleMouseEnter = () => {
     set({
       xy: [
-        utils.generateRandomValue(
-          utils.getElemPosition(field).x,
-          utils.getElemPosition(field).x + 200
-        ),
-        utils.generateRandomValue(
-          utils.getElemPosition(field).y,
-          utils.getElemPosition(field).y + 200
-        ),
-        90
+        utils.generateRandomValue(50, 450),
+        utils.generateRandomValue(50, 450),
+        utils.generateRandomValue(0, 360)
       ],
       config: {
         tention: speed * 50,
         friction: 100 / speed,
-        easing: t => t ** 2,
-        duration: undefined
+        easing: t => utils.getEasingFunc(easeFunction, t),
+        duration: d3easing ? duration : undefined
       }
     });
   };
@@ -89,7 +75,10 @@ const Bug = ({ speed, direction }) => {
 
 Bug.propTypes = {
   speed: PropTypes.number.isRequired,
-  direction: PropTypes.bool.isRequired
+  direction: PropTypes.bool.isRequired,
+  d3easing: PropTypes.bool.isRequired,
+  easeFunction: PropTypes.string.isRequired,
+  duration: PropTypes.number.isRequired
 };
 
 export default Bug;

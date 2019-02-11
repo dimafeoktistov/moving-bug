@@ -20,13 +20,6 @@
   color: white;
 }
 
-.bug {
-  position: absolute;
-  width: 25px;
-  height: 25px;
-  background: #000;
-}
-
 .field {
   position: relative;
   width: 500px;
