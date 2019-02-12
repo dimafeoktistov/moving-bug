@@ -1,85 +1,57 @@
 :root {
-  --c: rgba(255, 255, 255, 0.7);
-  --t: transparent;
+    --c: rgba(255, 255, 255, 0.7);
+    --t: transparent;
 }
 
 .field {
-  position: relative;
-  width: 750px;
-  height: 750px;
-  overflow: hidden;
-  border: black 2px solid;
-  margin: auto;
-  border-radius: 15px;
-  background-image: repeating-linear-gradient(
-      45deg,
-      var(--c) 0,
-      var(--c) 20px,
-      var(--t) 20px,
-      var(--t) 32px,
-      var(--c) 32px,
-      var(--c) 44px,
-      var(--t) 44px,
-      var(--t) 56px,
-      var(--c) 56px,
-      var(--c) 68px,
-      var(--t) 68px,
-      var(--t) 80px,
-      var(--c) 0
-    ),
-    repeating-linear-gradient(
-      -45deg,
-      var(--c) 0,
-      var(--c) 20px,
-      var(--t) 20px,
-      var(--t) 32px,
-      var(--c) 32px,
-      var(--c) 44px,
-      var(--t) 44px,
-      var(--t) 56px,
-      var(--c) 56px,
-      var(--c) 68px,
-      var(--t) 68px,
-      var(--t) 80px,
-      var(--c) 0
-    ),
-    linear-gradient(to bottom right, #fc354c, #0abfbc);
+    position: relative;
+    width: 700px;
+    height: 700px;
+    overflow: hidden;
+    border: black 2px solid;
+    margin: auto;
+    border-radius: 15px;
+    background-image: repeating-linear-gradient( 45deg, var(--c) 0, var(--c) 20px, var(--t) 20px, var(--t) 32px, var(--c) 32px, var(--c) 44px, var(--t) 44px, var(--t) 56px, var(--c) 56px, var(--c) 68px, var(--t) 68px, var(--t) 80px, var(--c) 0), repeating-linear-gradient( -45deg, var(--c) 0, var(--c) 20px, var(--t) 20px, var(--t) 32px, var(--c) 32px, var(--c) 44px, var(--t) 44px, var(--t) 56px, var(--c) 56px, var(--c) 68px, var(--t) 68px, var(--t) 80px, var(--c) 0), linear-gradient(to bottom right, #fc354c, #0abfbc);
 }
 
-.field > div {
-  position: absolute;
-  will-change: transform;
-  height: 50px;
-  width: 50px;
-  top: 0;
-  margin-left: 0;
-  background-image: url(https://www.svgrepo.com/show/13138/bug.svg);
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: 50px 50px;
-  cursor: pointer;
+.field>div {
+    position: absolute;
+    will-change: transform;
+    height: 50px;
+    width: 50px;
+    top: 0;
+    margin-left: 0;
+    background-image: url(../../assets/bug.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 50px 50px;
+    cursor: pointer;
 }
 
-.field > div:nth-child(2) {
-  height: 40px;
-  width: 40px;
-  background-size: 40px 40px;
+.field>div:nth-child(2) {
+    height: 50px;
+    width: 50px;
+    background-size: 50px 50px;
+    background-image: url(../../assets/bug1.svg);
 }
 
-.field > div:nth-child(3) {
-  height: 30px;
-  width: 30px;
-  background-size: 30px 30px;
+.field>div:nth-child(3) {
+    height: 50px;
+    width: 50px;
+    background-size: 30px 30px;
+    background-image: url(../../assets/bug2.svg);
 }
 
-.field > div:nth-child(4) {
-  height: 30px;
-  width: 30px;
-  background-size: 30px 30px;
+.field>div:nth-child(4) {
+    height: 50px;
+    width: 50px;
+    background-size: 50px 50px;
+    background-image: url(../../assets/bug3.svg);
 }
 
-.field > div:nth-child(5) {
-  height: 30px;
-  width: 30px;
-  background-size: 30px 30px;
+.field>div:nth-child(5) {
+    height: 50px;
+    width: 50px;
+    background-size: 50px 50px;
+    background-image: url(../../assets/insect.svg);
 }

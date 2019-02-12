@@ -49,8 +49,8 @@ const Bug = ({
   const handleMouseEnter = () => {
     setTrail({
       xy: [
-        utils.generateRandomValue(50, 700),
-        utils.generateRandomValue(50, 700),
+        utils.generateRandomValue(50, 650),
+        utils.generateRandomValue(50, 650),
         utils.generateRandomValue(0, 360),
       ],
       config: {
@@ -83,7 +83,11 @@ Bug.propTypes = {
   easeFunction: PropTypes.string.isRequired,
   duration: PropTypes.number.isRequired,
   bugsNum: PropTypes.number.isRequired,
-  xy: PropTypes.arrayOf(PropTypes.number).isRequired,
+  xy: PropTypes.arrayOf(PropTypes.number),
+};
+
+Bug.defaultProps = {
+  xy: [350, 350, 90],
 };
 
 export default Bug;

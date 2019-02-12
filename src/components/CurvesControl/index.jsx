@@ -58,6 +58,8 @@ const CurvesControl = ({
           disabled={!d3easing}
         />
         {duration}
+        {' '}
+        мс
       </div>
     </fieldset>
   );
