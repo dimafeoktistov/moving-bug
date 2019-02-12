@@ -1,0 +1,9 @@
+{
+  "parser": "babel-eslint",
+  "plugins": ["react"],
+  "extends": "airbnb",
+  "rules": {
+    "no-restricted-syntax": ["error", "never"],
+    "import/no-named-as-default": [0, "never"]
+  }
+}

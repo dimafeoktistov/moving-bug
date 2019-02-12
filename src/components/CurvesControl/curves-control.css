@@ -1,0 +1,26 @@
+.curve-controls {
+    background: #fff;
+    border-radius: 15px;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+}
+
+legend {
+    background: rgb(38, 108, 219);
+    border-radius: 10px;
+    padding: 5px;
+    border: 1px solid black;
+    color: #fff;
+}
+
+.function-control {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.select {
+    width: 150px;
+}

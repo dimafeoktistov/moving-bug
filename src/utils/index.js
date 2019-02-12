@@ -38,7 +38,7 @@ export const generateRandomValue = (min, max) =>
   Math.floor(Math.random() * (max - min) + min);
 
 export const getRotationDegrees = (anchor, point) =>
-  (Math.atan2(anchor.y - point.y, anchor.x - point.x) * 180) / Math.PI + 180;
+  (Math.atan2(anchor.y - point.y, anchor.x - point.x) * 180) / Math.PI + 270;
 
 export const translate = (x, y, angle) =>
   `translate(${x}px, ${y}px) rotate(${angle}deg)`;
